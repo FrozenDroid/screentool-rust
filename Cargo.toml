@@ -1,0 +1,15 @@
+[package]
+name = "screentool"
+version = "0.1.0"
+authors = ["Vincent Stakenburg <vincentstakenburg@gmail.com>"]
+
+[dependencies]
+gdk = "^0"
+
+[dependencies.gtk]
+version = "0.3.0"
+features = ["v3_10"]
+
+[[bin]]
+name = "screentool"
+path = "screentool.rs"
