@@ -36,7 +36,7 @@ fn main() {
     let label2 = Label::new(Some("Booooop"));
 
     let list_box = ListBox::new();
-    let list_box_row = ListBox::new();
+    let list_box_row = ListBoxRow::new();
 
     let color = gdk::RGBA { alpha: 100.0, blue: 255.0, green: 0.0, red: 0.0};
 
@@ -44,6 +44,9 @@ fn main() {
     println!("{:?}", check_button.get_child().unwrap().downcast::<gtk::Label>().unwrap().set_markup("<span foreground=\"black\">boop!</span>"));
     //check_button.override_color(gtk::StateFlags::NORMAL, &color);
     list_box_row.add(&check_button);
+    addOptionRow("Boop", &list_box);
+    list_box_row.add(&check_button.clone());
+    list_box_row.add(&check_button.clone());
     list_box.add(&list_box_row);
 
     content_area.add(&label);
@@ -56,5 +59,9 @@ fn main() {
     dialog.show_all();
 
     gtk::main();
+}
+
+fn addOptionRow(s: &str, row: &ListBox) {
+
 }
 
