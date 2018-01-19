@@ -36,10 +36,7 @@ fn action_from_string(string: String) -> Action {
 }
 
 fn main() {
-    if gtk::init().is_err() {
-        println!("Couldn't initialize GTK!");
-        return;
-    }
+
 
     let matches = App::new("screentool-rust").version("0.1")
                     .arg(Arg::with_name("action")
@@ -69,6 +66,10 @@ enum Action {
 }
 
 fn type_dialog() -> Action {
+    if gtk::init().is_err() {
+        println!("Couldn't initialize GTK!");
+        return;
+    }
     let type_dialog_glade = include_str!("type-dialog.glade");
     let builder = Builder::new_from_string(type_dialog_glade);
 
