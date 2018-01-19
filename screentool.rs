@@ -27,8 +27,12 @@ macro_rules! clone {
     );
 }
 
-fn action_from_string(string: &str) -> Action {
-    
+fn action_from_string(string: String) -> Action {
+    match string.to_lowercase().as_str() {
+        "screenshot" => Action::Screenshot,
+        "record" | "recording" => Action::Record,
+        _ => Action::Cancel
+    }
 }
 
 fn main() {
@@ -45,13 +49,7 @@ fn main() {
                         .takes_value(true))
                     .get_matches();
 
-    let action = matches.value_of("action").map(|s|
-        match s.to_lowercase().as_str() {
-            "screenshot" => Action::Screenshot,
-            "record" => Action::Record,
-            _ => Action::Cancel
-        }
-    ).unwrap_or_else(type_dialog);
+    let action = matches.value_of("action").map(|s| action_from_string(s.to_string())).unwrap_or_else(type_dialog);
 
     println!("{:?}", action);
 
@@ -95,7 +93,7 @@ fn type_dialog() -> Action {
     continue_button.connect_clicked(clone!(action, type_list => move |_| {
         println!("{:?}", type_list.get_active_text());
         if let Some(active_text) = type_list.get_active_text() {
-            action.set(action_from_string(active_text);
+            action.set(action_from_string(active_text));
         }
         gtk::main_quit();
     }));
