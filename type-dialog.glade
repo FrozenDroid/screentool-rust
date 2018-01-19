@@ -2,20 +2,6 @@
 <!-- Generated with glade 3.20.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkListStore" id="liststore1">
-    <columns>
-      <!-- column-name Option -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Screenshot</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Record</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkDialog" id="type_dialog">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
@@ -34,7 +20,7 @@
             <property name="margin_top">15</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton">
+              <object class="GtkButton" id="cancel_button">
                 <property name="label" translatable="yes">Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -47,7 +33,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton">
+              <object class="GtkButton" id="continue_button">
                 <property name="label" translatable="yes">Continue</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -67,16 +53,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkComboBox" id="type_list">
+          <object class="GtkComboBoxText" id="type_combobox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="model">liststore1</property>
-            <child>
-              <object class="GtkCellRendererText"/>
-              <attributes>
-                <attribute name="text">0</attribute>
-              </attributes>
-            </child>
+            <items>
+              <item translatable="yes">Screenshot</item>
+              <item translatable="yes">Recording</item>
+            </items>
           </object>
           <packing>
             <property name="expand">False</property>

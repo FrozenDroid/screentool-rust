@@ -5,6 +5,7 @@ authors = ["Vincent Stakenburg <vincentstakenburg@gmail.com>"]
 
 [dependencies]
 gdk = "^0"
+clap = "2"
 
 [dependencies.gtk]
 version = "0.3.0"
