@@ -68,7 +68,7 @@ enum Action {
 fn type_dialog() -> Action {
     if gtk::init().is_err() {
         println!("Couldn't initialize GTK!");
-        return;
+        exit(1);
     }
     let type_dialog_glade = include_str!("type-dialog.glade");
     let builder = Builder::new_from_string(type_dialog_glade);
