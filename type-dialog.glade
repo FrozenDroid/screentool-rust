@@ -56,6 +56,7 @@
           <object class="GtkComboBoxText" id="type_combobox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="active">0</property>
             <items>
               <item translatable="yes">Screenshot</item>
               <item translatable="yes">Recording</item>

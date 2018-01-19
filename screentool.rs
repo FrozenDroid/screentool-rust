@@ -1,4 +1,3 @@
-
 extern crate gtk;
 extern crate gdk;
 extern crate clap;
@@ -27,6 +26,13 @@ macro_rules! clone {
     );
 }
 
+#[derive(Clone, Copy, Debug)]
+enum Action {
+    Screenshot,
+    Record,
+    Cancel
+}
+
 fn action_from_string(string: String) -> Action {
     match string.to_lowercase().as_str() {
         "screenshot" => Action::Screenshot,
@@ -36,8 +42,6 @@ fn action_from_string(string: String) -> Action {
 }
 
 fn main() {
-
-
     let matches = App::new("screentool-rust").version("0.1")
                     .arg(Arg::with_name("action")
                         .short("a")
@@ -48,8 +52,6 @@ fn main() {
 
     let action = matches.value_of("action").map(|s| action_from_string(s.to_string())).unwrap_or_else(type_dialog);
 
-    println!("{:?}", action);
-
     match action {
         Action::Screenshot => take_screenshot(),
         Action::Record => record_screen(),
@@ -58,18 +60,12 @@ fn main() {
 
 }
 
-#[derive(Clone, Copy, Debug)]
-enum Action {
-    Screenshot,
-    Record,
-    Cancel
-}
-
 fn type_dialog() -> Action {
     if gtk::init().is_err() {
         println!("Couldn't initialize GTK!");
         exit(1);
     }
+
     let type_dialog_glade = include_str!("type-dialog.glade");
     let builder = Builder::new_from_string(type_dialog_glade);
 
@@ -79,8 +75,6 @@ fn type_dialog() -> Action {
     let cancel_button: Button = builder.get_object("cancel_button").expect("Couldn't get cancel_button");
 
     let action = Rc::new(Cell::new(Action::Cancel));
-
-    type_list.set_active(0);
 
     dialog.connect_delete_event(move |_,_| {
         gtk::main_quit();
@@ -106,8 +100,10 @@ fn type_dialog() -> Action {
 }
 
 fn record_screen() {
+    println!("Record screen!");
 }
 
 fn take_screenshot() {
+    println!("Take screenshot!");
 }
 
