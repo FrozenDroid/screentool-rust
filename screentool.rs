@@ -1,6 +1,7 @@
 extern crate clap;
 extern crate gdk;
 extern crate gtk;
+extern crate serde_json;
 
 use gtk::prelude::*;
 use gtk::{Builder, Button, ComboBoxText, Dialog};
@@ -9,7 +10,6 @@ use std::process::exit;
 use std::rc::Rc;
 use std::cell::Cell;
 use std::process::Command;
-use std::thread::sleep;
 
 macro_rules! clone {
     (@param _) => ( _ );
@@ -66,7 +66,7 @@ fn main() {
         _ => exit(0),
     }
 
-    while (true) {}
+    loop {}
 }
 
 fn type_dialog() -> Action {
@@ -128,6 +128,7 @@ fn take_screenshot() {
         "{:?}",
         Command::new("maim")
             .arg("-s")
+            .arg("test.png")
             .output()
             .expect("Failed to take screenshot")
     );
